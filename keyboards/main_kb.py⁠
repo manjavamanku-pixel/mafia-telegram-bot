@@ -1,0 +1,40 @@
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+from utils.lang import t
+
+LANG_FLAGS = {
+    "uz": "🇺🇿 O'zbek", "ru": "🇷🇺 Rus", "en": "🇬🇧 English",
+    "kz": "🇰🇿 Qozoq", "tj": "🇹🇯 Tojik", "tm": "🇹🇲 Turkman",
+    "az": "🇦🇿 Ozarbayjon", "tr": "🇹🇷 Turk", "de": "🇩🇪 Nemis", "ar": "🇸🇦 Arab"
+}
+
+def lang_keyboard(enabled_langs: list[str]) -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    for code, label in LANG_FLAGS.items():
+        if code in enabled_langs:
+            builder.button(text=label, callback_data=f"lang_{code}")
+    builder.adjust(1)
+    return builder.as_markup()
+
+def main_menu(lang: str, bot_username: str, show_clone: bool = False) -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    
+    # Videodagi King Mafia dizayni tugmalari:
+    builder.button(text="➕ Guruhingizga qo'shish", url=f"https://t.me/{bot_username}?startgroup=start")
+    builder.button(text="👥 Asosiy Guruh", url="https://t.me/KingMafiaAsosiy")
+    builder.button(text="👤 Mening profilim", callback_data="profile")
+    builder.button(text="🏆 Top O'yinchilar", callback_data="rating")
+    builder.button(text="🔗 Referal tizimi", callback_data="referal")
+    builder.button(text="💎 PRO Guruhlar", callback_data="premium")
+    builder.button(text="📢 Rasmiy kanal", callback_data="news")
+    builder.button(text="⚙️ Sozlamalar", callback_data="admin")
+    builder.button(text="📜 Rollar haqida", callback_data="rules")
+
+    # Videodagi ketma-ketlik: 1 ta, 1 ta, 2 ta, 2 ta, 1 ta, 2 ta
+    builder.adjust(1, 1, 2, 2, 1, 2)
+    return builder.as_markup()
+
+def back_button(lang: str, callback: str = "start") -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[[
+        InlineKeyboardButton(text="⬅️ Orqaga", callback_data=callback)
+    ]])
