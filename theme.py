@@ -1,15 +1,15 @@
-"""Тексты и подписи OPC Events."""
+"""Mafia Events uchun matnlar va tugmalar."""
 
 from __future__ import annotations
 
-BOT_TITLE = "OPC · Иваново · Ленина"
-LOCATION_LINE = "Иваново · ул. Ленина"
-BRAND = "OPC"
+BOT_TITLE = "King Mafia Club"
+LOCATION_LINE = "Toshkent · Online"
+BRAND = "Wars Mafia"
 
-MENU_BUILD_TAG = "opc-ui-2026-06"
+MENU_BUILD_TAG = "mafia-ui-2026"
 
-VISIBILITY_OPEN_TEXT = "🔓 Открытая — может присоединиться любой"
-VISIBILITY_APPROVAL_TEXT = "🔒 По согласованию с организатором"
+VISIBILITY_OPEN_TEXT = "🔓 Ochiq — barcha qo'shilishi mumkin"
+VISIBILITY_APPROVAL_TEXT = "🔒 Tashkilotchi ruxsati bilan"
 
 CB_MENU_GAMES = "menu:games"
 CB_MENU_MASTERCLASS = "menu:masterclass"
@@ -48,10 +48,10 @@ def event_type_icon(event_type: str) -> str:
 
 def event_type_label(event_type: str) -> str:
     return {
-        "mafia": "Мафия",
-        "codenames": "Коднеймс",
-        "masterclass": "Мастер-класс",
-    }.get(event_type, "Мероприятие")
+        "mafia": "Mafiya",
+        "codenames": "Codenames",
+        "masterclass": "Master-klass",
+    }.get(event_type, "Tadbir")
 
 
 def visibility_icon(visibility: str) -> str:
@@ -65,10 +65,10 @@ def format_date(date_str: str) -> str:
 
 def event_type_short(event_type: str) -> str:
     return {
-        "mafia": "Мафия",
-        "codenames": "Коднеймс",
-        "masterclass": "МК",
-    }.get(event_type, "Событие")
+        "mafia": "Mafiya",
+        "codenames": "Codenames",
+        "masterclass": "MK",
+    }.get(event_type, "Tadbir")
 
 
 def format_event_card_html(
@@ -101,15 +101,15 @@ def build_main_menu_html(event_blocks: list[str]) -> str:
     lines = [
         f"<b>{BRAND}</b>",
         LOCATION_LINE,
-        "<i>Твоя кофейня — твои игры</i>",
+        "<i>Sizning sevimli Mafia o'yiningiz</i>",
         "",
-        "<b>БЛИЖАЙШИЕ МЕРОПРИЯТИЯ</b>",
+        "<b>YAQIN KUNDAGI O'YINLAR</b>",
     ]
     if event_blocks:
         lines.extend(event_blocks)
     else:
-        lines.append("<i>Пока ничего не запланировано</i>")
-    lines.extend(["", "<b>РАЗДЕЛЫ</b>", f"<i>{MENU_BUILD_TAG}</i>"])
+        lines.append("<i>Hozircha hech qanday o'yin rejalashtirilmagan</i>")
+    lines.extend(["", "<b>BO'LIMLAR</b>", f"<i>{MENU_BUILD_TAG}</i>"])
     return "\n".join(lines)
 
 
